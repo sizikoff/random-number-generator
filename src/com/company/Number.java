@@ -4,8 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+
 
 public class Number extends JFrame {
     public Number(){
@@ -21,13 +20,41 @@ public class Number extends JFrame {
         JButton jbt2 = new JButton("Выход");
         add(jbt2);
 
-        JTextField jtf = new JTextField("Число");
-        add(jtf);
-        jtf.addKeyListener(new KeyAdapter() {
-            public void keyTyped(KeyEvent e) {
-                char c = e.getKeyChar();
-                if ( ((c < '0') || (c > '9'))) {
-                    e.consume();  // игнорим введенные буквы и пробел
+        JLabel jlb = new JLabel();
+        add(jlb);
+
+        ButtonGroup group = new ButtonGroup();
+        JRadioButton jrb = new JRadioButton("от 0 до 10", false);
+        JRadioButton jrb2 = new JRadioButton("от 0 до 50", false);
+        JRadioButton jrb3 = new JRadioButton("от 0 до 100", false);
+        add(jrb);
+        add(jrb2);
+        add(jrb3);
+        group.add(jrb);
+        group.add(jrb2);
+        group.add(jrb3);
+
+        jbt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (jrb.isSelected()) {
+                    int a = 0;
+                    int b = 10;
+                    int random_number = (a + (int) (Math.random() * b));
+                    String aString = Integer.toString(random_number);
+                    jlb.setText(aString);
+                } else if (jrb2.isSelected()) {
+                    int a = 0;
+                    int b = 50;
+                    int random_number = (a + (int) (Math.random() * b));
+                    String aString = Integer.toString(random_number);
+                    jlb.setText(aString);
+                } else if (jrb3.isSelected()) {
+                    int a = 0;
+                    int b = 100;
+                    int random_number = (a + (int) (Math.random() * b));
+                    String aString = Integer.toString(random_number);
+                    jlb.setText(aString);
                 }
             }
         });
@@ -36,18 +63,6 @@ public class Number extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
-            }
-        });
-
-        jbt.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int a = 0;
-                int b = 100;
-
-                int random_number = a + (int) (Math.random() * b);
-                String aString = Integer.toString(random_number);
-                jtf.setText(aString);
             }
         });
 
